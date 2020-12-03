@@ -52,15 +52,15 @@ jobs:
       - *install-dependencies
       - *save_cache
 
-  linting:
+  prettier:
     executor: app-executor
     steps:
       - checkout
       - *show-current-branch-name
       - *restore-cache
       - run:
-          name: Run linting
-          command: npm run lint
+          name: Run prettier check
+          command: npm run prettier:check
 
   deploy-to-aws-s3:
     executor: app-executor
@@ -108,7 +108,7 @@ workflows:
   build_and_deploy:
     jobs:
       - build
-      - linting:
+      - prettier:
           requires:
             - build
           filters:
@@ -119,7 +119,7 @@ workflows:
                 - master
       - deploy-to-aws-s3:
           requires:
-            - linting 
+            - prettier 
           filters:
             branches:
               only:
