@@ -14,7 +14,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "lint": "eslint",
+    "pretest": "npm run lint",
+    "lint": "./node_modules/.bin/eslint ./app",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -37,6 +38,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/eslint-plugin": "^7.12.1",
     "eslint": "^7.14.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-standard": "^16.0.2",
