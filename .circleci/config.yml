@@ -51,7 +51,17 @@ jobs:
       - *restore-cache
       - *install-dependencies
       - *save_cache
-      
+
+  checklint:
+    executor: docker-image
+    steps:
+      - checkout
+      - node/install-packages:
+          cache-path: ~/project/node_modules
+          override-ci-command: npm install
+      - run:
+          command: npm run lint 
+          
   linting:
     executor: app-executor
     steps:
